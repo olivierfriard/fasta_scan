@@ -1,0 +1,22 @@
+object frmRetrieve: TfrmRetrieve
+  Left = 351
+  Top = 320
+  Width = 317
+  Height = 100
+  VertScrollBar.Range = 89
+  HorzScrollBar.Range = 307
+  BorderStyle = fbsToolWindow
+  Caption = 'Retrieving more sequence information'
+  Color = clBackground
+  FormStyle = fsStayOnTop
+  Position = poDefault
+  PixelsPerInch = 96
+  object bt_cancel: TButton
+    Left = 232
+    Top = 64
+    Width = 75
+    Height = 25
+    Caption = 'Cancel'
+    TabOrder = 0
+  end
+end

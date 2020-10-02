@@ -1,0 +1,168 @@
+object frmMain: TfrmMain
+  Left = 347
+  Height = 384
+  Top = 223
+  Width = 561
+  VertScrollBar.Range = 19
+  ActiveControl = lv
+  Caption = 'FASTA 36 Scan'
+  ClientHeight = 364
+  ClientWidth = 561
+  Color = clBackground
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '2.0.10.0'
+  object lv: TListView
+    Left = 0
+    Height = 341
+    Top = 0
+    Width = 561
+    Align = alClient
+    Checkboxes = True
+    Columns = <    
+      item
+      end    
+      item
+        Caption = 'AC'
+      end    
+      item
+        Caption = 'DE'
+      end    
+      item
+        Caption = 'Homology (%)'
+      end    
+      item
+        Caption = 'Length (nt)'
+        Width = 346
+      end>
+    MultiSelect = True
+    PopupMenu = lv_popupmenu
+    ReadOnly = True
+    RowSelect = True
+    TabOrder = 0
+    ViewStyle = vsReport
+    OnClick = lvClick
+  end
+  object sb: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 341
+    Width = 561
+    Color = clMenu
+    Panels = <    
+      item
+        Width = 150
+      end    
+      item
+        Width = 150
+      end    
+      item
+        Width = 250
+      end>
+    ParentColor = False
+    SimplePanel = False
+  end
+  object MainMenu1: TMainMenu
+    Left = 162
+    Top = 64
+    object Sequences1: TMenuItem
+      Caption = 'Sequences'
+      object LoadFASTAresults1: TMenuItem
+        Caption = 'Open FASTA output'
+        OnClick = Load
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object mi_Saveselectedsequences: TMenuItem
+        Caption = 'Save checked sequences in FASTA format'
+        OnClick = mi_SaveselectedsequencesClick
+      end
+      object mi_SaveselectedsequencesinFASTACONVformat: TMenuItem
+        Caption = 'Save checked sequences in "Query-anchored" format'
+        OnClick = mi_SaveselectedsequencesinFASTACONVformatClick
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object Quit1: TMenuItem
+        Caption = 'Quit'
+        OnClick = Quit1Click
+      end
+    end
+    object Selection1: TMenuItem
+      Caption = 'Selection'
+      Enabled = False
+      object Selectallsequences1: TMenuItem
+        Caption = 'Check all sequences'
+        OnClick = Selectallsequences1Click
+      end
+      object Unselectallsequences1: TMenuItem
+        Caption = 'Uncheck all sequences'
+        OnClick = Unselectallsequences1Click
+      end
+      object Invertselection1: TMenuItem
+        Caption = 'Invert check'
+        OnClick = Invertselection1Click
+      end
+      object N5: TMenuItem
+        Caption = '-'
+      end
+      object SUS1: TMenuItem
+        Caption = 'Check / Uncheck Sequences'
+        OnClick = SUS1Click
+      end
+    end
+    object Font1: TMenuItem
+      Caption = 'Font'
+      Visible = False
+    end
+    object Help1: TMenuItem
+      Caption = 'Help'
+      object Info1: TMenuItem
+        Caption = 'Alignment Info'
+        OnClick = Info1Click
+      end
+      object N4: TMenuItem
+        Caption = '-'
+      end
+      object Contents1: TMenuItem
+        Caption = 'Contents'
+        Enabled = False
+      end
+      object About1: TMenuItem
+        Caption = 'About...'
+        OnClick = About1Click
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open'
+    Filter = 'FASTA result file|*.fas;*.fasta|BLAST result file|*.blast|Text file|*.txt|All files|*.*'
+    Left = 40
+    Top = 41
+  end
+  object SaveDialog1: TSaveDialog
+    Title = 'Save As'
+    FilterIndex = 0
+    Left = 40
+    Top = 112
+  end
+  object lv_popupmenu: TPopupMenu
+    Left = 160
+    Top = 128
+    object MenuItem1: TMenuItem
+      Caption = 'Check'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Uncheck'
+      OnClick = MenuItem2Click
+    end
+  end
+end

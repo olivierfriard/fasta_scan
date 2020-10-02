@@ -1,0 +1,58 @@
+object frmWarning: TfrmWarning
+  Left = 444
+  Top = 372
+  Width = 250
+  Height = 155
+  HorzScrollBar.Range = 191
+  VertScrollBar.Range = 125
+  ActiveControl = Button1
+  Caption = 'Warning'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  PixelsPerInch = 96
+  object Label1: TLabel
+    Left = 59
+    Top = 10
+    Width = 107
+    Height = 13
+    Caption = 'This file already exists!'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 13
+    Font.Name = 'Arial'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+  end
+  object Button1: TButton
+    Left = 69
+    Top = 40
+    Width = 107
+    Height = 25
+    Caption = 'Overwrite it'
+    ModalResult = 3
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 70
+    Top = 70
+    Width = 107
+    Height = 25
+    Caption = 'Append sequences'
+    ModalResult = 4
+    TabOrder = 2
+  end
+  object Button3: TButton
+    Left = 70
+    Top = 100
+    Width = 107
+    Height = 25
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+end
