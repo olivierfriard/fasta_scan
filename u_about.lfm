@@ -42,18 +42,10 @@ object frmAbout: TfrmAbout
     Caption = 'lb_version'
     ParentColor = False
   end
-  object lb_exefilename: TLabel
-    Left = 16
-    Height = 13
-    Top = 76
-    Width = 72
-    Caption = 'lb_exefilename'
-    ParentColor = False
-  end
   object Memo1: TMemo
     Left = 16
-    Height = 185
-    Top = 104
+    Height = 209
+    Top = 80
     Width = 545
     BorderStyle = bsNone
     Color = clBtnFace

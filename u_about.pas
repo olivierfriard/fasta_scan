@@ -29,7 +29,6 @@ type
     Bevel1: TBevel;
     Button1: TButton;
     lb_version: TLabel;
-    lb_exefilename: TLabel;
     procedure Label1Click(Sender: TObject);
     procedure Memo1Change(Sender: TObject);
   private
