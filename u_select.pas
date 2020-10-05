@@ -1,6 +1,6 @@
-{u_select.pas - FASTA 36 Scan version 1.0
+{u_select.pas - FASTA 36 Scan
 
-Copyright (C) 2018-2019 Olivier Friard
+Copyright (C) 2018-2020 Olivier Friard
 
 olivier.friard@unito.it
 

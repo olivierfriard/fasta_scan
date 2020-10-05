@@ -1,4 +1,4 @@
-{u_main.pas - FASTA 36 Scan version 1.2
+{u_main.pas - FASTA 36 Scan
 
 Copyright (C) 2018-2020 Olivier Friard
 
@@ -71,8 +71,8 @@ type
   end;
 
 const maxseq = 1000000;
-      version_number = '1.2';
-      version_date = '2020-09-29';
+      version_number = '1.3';
+      version_date = '2020-10-05';
       program_name = 'FASTA 36 Scan';
 
 var frmMain: TfrmMain;
@@ -138,38 +138,10 @@ end; //count number of checked sequences
 procedure TfrmMain.About1Click(Sender: TObject);  //show About window
 begin
 frmabout.lb_version.caption := 'version ' + version_number;
-frmabout.lb_exefilename.caption := extractfilename(application.exename);
+// frmabout.lb_exefilename.caption := extractfilename(application.exename);
 frmabout.showmodal;
 end;
 
-
-procedure removeHTMLtag(var sl:tstringlist);  //remove HTML tag of sequence
-var s,s2:string;
-    t,i:integer;
-    flagin:boolean;
-begin
-for t:=0 to sl.count-1 do
-    begin
-    s:=sl[t];
-    flagin:=false;
-    s2:='';
-    for i:=1 to length(s) do
-        begin
-        if s[i]='<' then
-           flagin:=true;
-        if not flagin then
-           s2:=s2+s[i];
-        if s[i]='>' then
-           flagin:=false;
-        end;
-    while pos('&gt;',s2)<>0 do     //replace &gt; by ">"
-       begin
-       insert('>',s2,pos('&gt;',s2));
-       delete(s2,pos('&gt;',s2),4);
-       end;
-    sl[t]:=s2;
-    end;
-end; //removeHTMLtag
 
 procedure TfrmMain.Load(Sender: TObject);   //load file
 var s, s1, s2, mem_ac: string;
@@ -600,7 +572,7 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 var i:integer;
 begin
-IniFile:=Tinifile.create(extractFilePath(application.exename)+'FASTA_Scan.ini');
+IniFile:=Tinifile.create(extractFilePath(application.exename) + 'FASTA_Scan.ini');
 for i:=0 to lv.Columns.count-1 do
     lv.Columns[i].Width := inifile.readinteger('FASTA_Scan','col'+inttostr(i),100);
 inifile.free;
@@ -641,10 +613,12 @@ if paramcount <> 0 then
    end;
 end;
 
+
 procedure TfrmMain.lvClick(Sender: TObject);
 begin
 count_checked_sequences;
 end;
+
 
 procedure TfrmMain.Selectallsequences1Click(Sender: TObject);
 var w:integer;
@@ -656,6 +630,7 @@ if MessageDlg('Select all sequences?',mtConfirmation,[mbYes, mbNo],0)=mrYes then
 sb.panels[1].text:='Selected: '+inttostr(nseq);
 end;
 
+
 procedure TfrmMain.Unselectallsequences1Click(Sender: TObject);
 var w:integer;
 begin  //deselect all
@@ -665,6 +640,7 @@ if MessageDlg('Deselect all sequences?',mtConfirmation,[mbYes, mbNo],0)=mrYes th
           lv.items[w].checked:=false;
 sb.panels[1].text:='Selected: 0';
 end;
+
 
 procedure TfrmMain.Invertselection1Click(Sender: TObject);
 var w:integer;
@@ -679,10 +655,9 @@ count_checked_sequences;
 end;
 
 
-
 procedure Lalign(var s:string; b:byte);
 begin
-s:=s+dupestring(' ',b-length(s));
+s := s + dupestring(' ', b - length(s));
 end;
 
 procedure TfrmMain.mi_SaveselectedsequencesinFASTACONVformatClick(
@@ -696,8 +671,10 @@ var flagseqloc, flagtotrev, flagname, flaggap: boolean;
     s0, nomseq, nomquery, mem: string;
     s4,s5,q,seqquery, mem2, s,s2, query_id, new_seq, seq_ac, seq_def: string;
     ft: textfile;
-    flagadd, flagfirstgi, flag_incl_gi, flagL, flagrev: boolean;
-    w, w1, w2, w3, flag_different, i: integer;
+    flagadd, flagfirstgi, flag_incl_gi, flagL, flagrev,
+    flag_already_added, flag_query_added: boolean;
+    w, w1, w2, w3, flag_different, i, query_seq_idx: integer;
+    different_aligned_queries: Tstringlist;
 
 begin
 mem := '*';
@@ -718,6 +695,7 @@ if n1 = 0 then
    exit;
    end;
 
+(*
 flag_different := 0;
 mem2 := '';
 for w := 0 to lv.items.count - 1 do
@@ -732,261 +710,61 @@ for w := 0 to lv.items.count - 1 do
            end;
         end;
 
-showmessage(inttostr(flag_different));
+//showmessage(inttostr(flag_different));
 
 if (flag_different = 1) then
    exit;
+*)
 
-f2 := Tstringlist.create;
-seq_ac := 'query';
-while length(seq_ac) < 100 do
-    seq_ac := seq_ac + ' ';
-f2.add(seq_ac + ' ' +mem2);
-
-for w := 0 to lv.items.count - 1 do
-    if (lv.items[w].checked) then
-       begin
-       new_seq := '';
-       for i := 1 to length(mem2) do
-           if mem2[i] = seq_list[w][i] then
-              new_seq := new_seq + '.'
-           else
-              new_seq := new_seq + seq_list[w][i];
-       seq_ac := lv.items[w].subitems.strings[0];
-       seq_ac := seq_ac + '  ' +lv.items[w].subitems.strings[1];
-
-       while length(seq_ac) < 100 do
-           seq_ac := seq_ac + ' ';
-       f2.add(seq_ac + ' ' + new_seq);
-       end;
-
-f2.savetofile('1.fbs');
-
-
-(*
-//======= FASTA ============================
-Screen.Cursor := crHourglass;
-if fastatype <> 0 then
-   begin
-   flagtotrev := false;
-   f2 := Tstringlist.create;
-   //extract seq query
-   seqquery := '';
-
-   flagL:=true;
-   if pos('initn:', f[posit[1]^+1]) <> 0 then //option -L "more info"
-      flagL := false;
-
-   if flagL then //option -L "more info"
-      w := posit[1]^ + 6
-   else
-      w := posit[1]^ + 5;
-
-   nomquery := copy(f[w],1,pos(' ',f[w])-1);
-   repeat
-       if copy(f[w],1,pos(' ',f[w])-1)=nomquery then
-          begin
-          seqquery:=seqquery+copy(f[w],length(nomquery)+1,255);
-          inc(w,2);
-          end;
-       inc(w);
-   until w >= posit[2]^;
-
-   //delete space char.
-   seqquery := trim(seqquery);
-   while pos(' ', seqquery) <> 0 do
-       delete(seqquery,pos(' ', seqquery), 1);
-
-   //rev. seq
-   if (pos('rev-comp',f[posit[1]^+1])<>0) or (pos('rev-comp', f[posit[1]^+2])<>0) then
-      seqquery:=rev(seqquery);
-
-   Lalign(nomquery, tabseq);
-
-   f2.add(nomquery + seqquery);
-
-   for w:=0 to lv.items.count-1 do
-       begin
-       if lv.items[w].checked then
-          begin
-          flagseqloc:=false;
-          n1:=w+1;      // read sequence number
-          if (pos('/rev',f[posit[n1]^-3])<>0)
-             or (pos('rev-comp ',f[posit[n1]^+1])<>0)
-             or (pos('rev-comp ',f[posit[n1]^+2])<>0) then
-             begin
-             flagrev:=true;
-             flagtotrev:=true;
-             end
-          else
-             flagrev:=false;
-          case fastatype of 1:begin      //GCG
-                              if pos('ID',f[posit[n1]^])=1 then
-                                 begin
-                                 s:=copy(f[posit[n1]^],6,80);
-                                 s:=uppercase(copy(s,1,pos(' ',s)-1));
-                                 end
-                              else
-                               if pos('LOCUS',f[posit[n1]^])=1 then
-                                 begin
-                                 s:=copy(f[posit[n1]^],13,80);
-                                 s:=uppercase(copy(s,1,pos(' ',s)-1));
-                                 end
-                               else //local db sequences
-                                 begin
-                                 flagseqloc:=true;
-                                 s:=f[posit[n1]^];
-                                 end;
-                               end;
-                            2:begin        // PEARSON FASTA
-                              s:=uppercase(copy(f[posit[n1]^],1,pos(' ',f[posit[n1]^])));
-                              delete(s,1,2); //clear ">>"
-                              s:=s+' '+copy(f[posit[n1]^],14,255);
-                              if flagL then //option -L "more info"
-                                 begin
-                                 s:=s+' '+f[posit[n1]^+1];
-
-                                 s4:=f[posit[n1]^+2];  //initn: 115 init1: 115 opt: 115
-                                 s5:=f[posit[n1]^+3];  //banded Smith-Waterman score: 115;  100.000% identity (100.000% ungapped) in 23 nt overlap (1-23:15354-15376)
-                                 end
-                              else
-                                 begin
-                                 s4:=f[posit[n1]^+1];  //initn: 115 init1: 115 opt: 115
-                                 s5:=f[posit[n1]^+2];  //banded Smith-Waterman score: 115;  100.000% identity (100.000% ungapped) in 23 nt overlap (1-23:15354-15376)
-                                 end;
-                              end;
-                            3:begin  //SSEARCH
-                              s:=uppercase(trim(copy(f[posit[n1]^],3,13))); //AC
-                              s:=s+'  '+copy(f[posit[n1]^],16,255);
-                              if flagL then //option -L "more info"
-                                 begin
-                                 s:=s+' '+f[posit[n1]^+1];
-                                 s4:=f[posit[n1]^+2];
-                                 s5:=f[posit[n1]^+3];
-                                 end
-                              else
-                                 begin
-                                 s4:=f[posit[n1]^+1];
-                                 s5:=f[posit[n1]^+2];
-                                 end;
-                              end;
-                            end;//case
-
-          if lv.items[w].subitems.count>2 then
-             nomseq:=lv.items[w].subitems.strings[0]
-          else
-             nomseq:='SEQUENCE_NAME_ERROR';
-          //modification of sequence name if name already found
-          while pos('*'+nomseq+'*',mem)<>0 do
-             begin
-             nomseq:=nomseq+'_';
-             flagname:=true;
-             end;
-
-          mem:=mem+nomseq+'*';
-          if flagseqloc then   //local db sequences
-             begin
-             w1:=1;
-             s2:='';
-             while posit[n1]^+w1<posit[n1+1]^ do
-                begin
-                if (f[posit[n1]^+w1]<>'') and checknumb(f[posit[n1]^+w1]) and (f[posit[n1]^+w1+1]<>'') then
-                   begin
-                   inc(w1,3);
-                   deb:=1;
-                   // skip seq ID
-                   while f[posit[n1]^+w1][deb]<>' ' do
-                      inc(deb);
-                   // skip space character
-                   while f[posit[n1]^+w1][deb]=' ' do
-                      inc(deb);
-                   for w2:=deb to length(f[posit[n1]^+w1-2]) do
-                       if pos(f[posit[n1]^+w1-2][w2],validbase)<>0 then
-                          s2:=s2+f[posit[n1]^+w1][w2];
-                   end;
-                inc(w1);
-                end;
-             end
-          else        // EMBL or GB
-             begin
-             s:=copy(lv.items[w].subitems.strings[0],1,6);
-             Lalign(s,6);
-             w1:=1;
-             s2:='';
-             q:='';
-             while posit[n1]^+w1<posit[n1+1]^ do
-                   begin
-                   if trim(uppercase(copy(f[posit[n1]^+w1],1,6)))=trim(uppercase(copy(s,1,pos('@',s+'@')-1))) then
-                      begin
-                      deb:=8;
-
-                      for w2:=deb to length(f[posit[n1]^+w1-2]) do
-                          if pos(f[posit[n1]^+w1-2][w2],validbase)<>0 then
-                             begin
-                             s2:=s2+f[posit[n1]^+w1][w2];
-                             q:=q+f[posit[n1]^+w1-2][w2];
-                             end;
-                      end;
-                   inc(w1);
-                   end;
-
-             end; //else
-
-       s0:=lv.items[w].subitems.strings[0];
-
-       if flagrev then
-          begin
-          s0:=s0+' /rev';
-          s2:=rev(s2);
-          q:=rev(q);
-          end;
-
-       Lalign(s0,16);
-
-       s0:=s0+'  '+lv.items[w].subitems.strings[1];   //add DEFINITION
-
-       //truncate if line>100 char
-       if length(s0)>100 then
-          s0:=copy(s0,1,98)+'..';
-
-       Lalign(s0,tabseq);
-
-       //clean seq vs query
-       for w2:=1 to length(q) do
-           begin
-           if s2[w2]=q[w2] then
-              s2[w2]:='.';
-           if q[w2]='-' then
-              s2[w2]:=chr(ord(s2[w2])+32);
-           end;
-
-       Lalign(s2,length(seqquery));
-
-       f2.add(s0+s2+'    '+lv.items[w].subitems.strings[3]);
-       end;
+// all different aligned queries
+different_aligned_queries := Tstringlist.create;
+different_aligned_queries.add(query_seq_list[0]);
+for query_seq_idx := 1 to  query_seq_list.count -1 do
+    begin
+    flag_already_added := false;
+    for w:= 0 to different_aligned_queries.count - 1 do
+        if query_seq_list[query_seq_idx] = different_aligned_queries[w] then
+            begin
+            flag_already_added := true;
+            break;
+            end;
+    if not flag_already_added then
+        different_aligned_queries.add(query_seq_list[query_seq_idx])
     end;
 
-   //FASTA output header
-   for w3 := 0 to f.Count - 1 do  //search for database info
-       if (pos(' residues ',f[w3])<>0) and (pos(' sequences',f[w3])<>0) and (pos(' in ',f[w3])<>0) then
-           break;
-   f2.insert(0,'');
-   f2.insert(0,'');
-   for w:=w3+5 downto w3 do
-       f2.Insert(0,f[w]);
+f2 := Tstringlist.create;
+for query_seq_idx := 0 to  different_aligned_queries.count -1 do
+    begin
+    flag_query_added := false;
+    for w := 0 to lv.items.count - 1 do
+        if (lv.items[w].checked) and (different_aligned_queries[query_seq_idx] = query_seq_list[w]) then
+           begin
+           if not flag_query_added then
+               begin
+               f2.add('');
+               seq_ac := 'query';
+               while length(seq_ac) < 100 do
+                   seq_ac := seq_ac + ' ';
+               f2.add(seq_ac + ' ' + different_aligned_queries[query_seq_idx]);
+               flag_query_added := true;
+               end;
 
-   f2.insert(0,'');
-   for w:=6 downto 0 do  //insert FASTA header
-       f2.insert(0,f[w]);
-     
-   f2.insert(0,'');
-   f2.insert(0,'FASTA scan '+version_number+' (output: query-anchored format)');
+           new_seq := '';
+           for i := 1 to length(query_seq_list[w]) do
+               if query_seq_list[w][i] = seq_list[w][i] then
+                  new_seq := new_seq + '.'
+               else
+                  new_seq := new_seq + seq_list[w][i];
+           seq_ac := lv.items[w].subitems.strings[0];
+           seq_ac := seq_ac + '  ' +lv.items[w].subitems.strings[1];
 
-   //end of file
-   f2.add('');
-   for w:=f.Count-7 to f.Count-1 do
-       f2.add(f[w]);
-   end; //fasta
+           while length(seq_ac) < 100 do
+               seq_ac := seq_ac + ' ';
+           f2.add(seq_ac + ' ' + new_seq);
+           end;
+    end;
+
+// showmessage(inttostr(f2.count));
 
 Screen.Cursor := crDefault;
 
@@ -1011,14 +789,15 @@ if savedialog1.execute then
       begin
       assignfile(ft,savedialog1.filename);  //add if file already exists
       append(ft);
-      for n1:=0 to f2.count-1 do
-          writeln(ft,f2[n1]);
+      for n1 := 0 to f2.count-1 do
+          writeln(ft, f2[n1]);
       closefile(ft);
       end;
    end;
-mem:='';
+
+mem := '';
 f2.free;
-*)
+
 end;
 
 end.  //u_main

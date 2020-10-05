@@ -2,15 +2,15 @@
 <CONFIG>
   <ProjectSession>
     <PathDelim Value="\"/>
-    <Version Value="11"/>
+    <Version Value="10"/>
     <BuildModes Active="Default"/>
     <Units Count="8">
       <Unit0>
         <Filename Value="fasta_36_scan_en_v1_2.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <CursorPos X="35" Y="12"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="67"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
@@ -21,19 +21,20 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="723"/>
-        <CursorPos X="19" Y="744"/>
-        <FoldState Value=" T3jA0P3237 p0tL0801111 T1q50j)"/>
+        <TopLine Value="16"/>
+        <CursorPos X="33" Y="75"/>
+        <FoldState Value=" T3jA0P323 T1q50j."/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <IsVisibleTab Value="True"/>
+          <EditorIndex Value="-1"/>
           <WindowIndex Value="1"/>
-          <TopLine Value="488"/>
+          <TopLine Value="489"/>
           <CursorPos X="51" Y="511"/>
         </ExtraEditor1>
-        <UsageCount Value="62"/>
+        <UsageCount Value="67"/>
         <Bookmarks Count="4">
-          <Item0 Y="703"/>
+          <Item0 Y="705"/>
           <Item1 Y="489" ID="1"/>
           <Item2 X="11" Y="181" ID="2"/>
           <Item3 X="6" Y="334" ID="4"/>
@@ -48,7 +49,7 @@
         <HasResources Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="3"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="67"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
@@ -59,7 +60,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="51"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="67"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
@@ -68,7 +69,7 @@
         <HasResources Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="3"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="67"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
       <Unit5>
@@ -77,7 +78,7 @@
         <HasResources Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="3"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="67"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit5>
       <Unit6>
@@ -86,142 +87,137 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="679"/>
         <CursorPos X="10" Y="701"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\lazarus\lcl\include\listitems.inc"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <CursorPos Y="28"/>
-        <UsageCount Value="15"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="14"/>
       </Unit7>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="u_main.pas"/>
-        <Caret Line="328" TopLine="293"/>
+        <Caret Line="728" TopLine="702"/>
       </Position1>
       <Position2>
         <Filename Value="u_main.pas"/>
-        <Caret Line="314" TopLine="293"/>
+        <Caret Line="730" TopLine="702"/>
       </Position2>
       <Position3>
         <Filename Value="u_main.pas"/>
-        <Caret Line="316" Column="13" TopLine="305"/>
+        <Caret Line="731" TopLine="702"/>
       </Position3>
       <Position4>
         <Filename Value="u_main.pas"/>
-        <Caret Line="727" TopLine="702"/>
+        <Caret Line="732" TopLine="702"/>
       </Position4>
       <Position5>
-        <Filename Value="C:\lazarus\lcl\include\listitems.inc"/>
-        <Caret Line="27"/>
+        <Filename Value="u_main.pas"/>
+        <Caret Line="727" TopLine="702"/>
       </Position5>
       <Position6>
-        <Filename Value="C:\lazarus\lcl\include\listitems.inc"/>
-        <Caret Line="28"/>
+        <Filename Value="u_main.pas"/>
+        <Caret Line="728" TopLine="702"/>
       </Position6>
       <Position7>
         <Filename Value="u_main.pas"/>
-        <Caret Line="728" TopLine="702"/>
+        <Caret Line="730" TopLine="702"/>
       </Position7>
       <Position8>
         <Filename Value="u_main.pas"/>
-        <Caret Line="730" TopLine="702"/>
+        <Caret Line="732" TopLine="702"/>
       </Position8>
       <Position9>
         <Filename Value="u_main.pas"/>
-        <Caret Line="731" TopLine="702"/>
+        <Caret Line="727" TopLine="702"/>
       </Position9>
       <Position10>
         <Filename Value="u_main.pas"/>
-        <Caret Line="732" TopLine="702"/>
+        <Caret Line="728" TopLine="702"/>
       </Position10>
       <Position11>
         <Filename Value="u_main.pas"/>
-        <Caret Line="727" TopLine="702"/>
+        <Caret Line="730" TopLine="702"/>
       </Position11>
       <Position12>
         <Filename Value="u_main.pas"/>
-        <Caret Line="728" TopLine="702"/>
+        <Caret Line="732" TopLine="702"/>
       </Position12>
       <Position13>
         <Filename Value="u_main.pas"/>
-        <Caret Line="730" TopLine="702"/>
+        <Caret Line="734" TopLine="702"/>
       </Position13>
       <Position14>
         <Filename Value="u_main.pas"/>
-        <Caret Line="732" TopLine="702"/>
+        <Caret Line="735" TopLine="702"/>
       </Position14>
       <Position15>
         <Filename Value="u_main.pas"/>
-        <Caret Line="727" TopLine="702"/>
+        <Caret Line="739" TopLine="702"/>
       </Position15>
       <Position16>
         <Filename Value="u_main.pas"/>
-        <Caret Line="728" TopLine="702"/>
+        <Caret Line="706" TopLine="698"/>
       </Position16>
       <Position17>
         <Filename Value="u_main.pas"/>
-        <Caret Line="730" TopLine="702"/>
+        <Caret Line="753" Column="51" TopLine="739"/>
       </Position17>
       <Position18>
         <Filename Value="u_main.pas"/>
-        <Caret Line="732" TopLine="702"/>
+        <Caret Line="748" Column="17" TopLine="724"/>
       </Position18>
       <Position19>
         <Filename Value="u_main.pas"/>
-        <Caret Line="734" TopLine="702"/>
+        <Caret Line="704" Column="37" TopLine="695"/>
       </Position19>
       <Position20>
         <Filename Value="u_main.pas"/>
-        <Caret Line="735" TopLine="702"/>
+        <Caret Line="752" Column="16" TopLine="728"/>
       </Position20>
       <Position21>
         <Filename Value="u_main.pas"/>
-        <Caret Line="739" TopLine="702"/>
+        <Caret Line="714" Column="36" TopLine="688"/>
       </Position21>
       <Position22>
         <Filename Value="u_main.pas"/>
-        <Caret Line="706" TopLine="698"/>
+        <Caret Line="305" Column="34" TopLine="284"/>
       </Position22>
       <Position23>
         <Filename Value="u_main.pas"/>
-        <Caret Line="753" Column="51" TopLine="739"/>
+        <Caret Line="746" TopLine="724"/>
       </Position23>
       <Position24>
         <Filename Value="u_main.pas"/>
-        <Caret Line="748" Column="17" TopLine="724"/>
+        <Caret Line="741" Column="9" TopLine="717"/>
       </Position24>
       <Position25>
         <Filename Value="u_main.pas"/>
-        <Caret Line="704" Column="37" TopLine="695"/>
+        <Caret Line="752" Column="9" TopLine="715"/>
       </Position25>
       <Position26>
         <Filename Value="u_main.pas"/>
-        <Caret Line="752" Column="16" TopLine="728"/>
+        <Caret Line="769" Column="30" TopLine="732"/>
       </Position26>
       <Position27>
         <Filename Value="u_main.pas"/>
-        <Caret Line="714" Column="36" TopLine="688"/>
+        <Caret Line="743" TopLine="693"/>
       </Position27>
       <Position28>
         <Filename Value="u_main.pas"/>
-        <Caret Line="305" Column="34" TopLine="284"/>
+        <Caret Line="773" Column="35" TopLine="718"/>
       </Position28>
       <Position29>
         <Filename Value="u_main.pas"/>
-        <Caret Line="746" TopLine="724"/>
+        <Caret Line="745" Column="50" TopLine="711"/>
       </Position29>
       <Position30>
         <Filename Value="u_main.pas"/>
-        <Caret Line="741" Column="9" TopLine="717"/>
+        <Caret Line="699" Column="75" TopLine="688"/>
       </Position30>
     </JumpHistory>
-    <RunParams>
-      <FormatVersion Value="2"/>
-      <Modes Count="0" ActiveMode="default"/>
-    </RunParams>
   </ProjectSession>
   <Debugging>
     <Watches Count="2">
