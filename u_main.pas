@@ -71,12 +71,12 @@ type
   end;
 
 const maxseq = 1000000;
-      version_number = '1.3';
-      version_date = '2020-10-05';
+      version_number = '1.4';
+      version_date = '2020-10-06';
       program_name = 'FASTA 36 Scan';
 
 var frmMain: TfrmMain;
-    nom_input,nq:string;
+    nom_input,nq, query_id:string;
     f, f2, f3: Tstringlist;
     seq_list, query_seq_list: Tstringlist;
     fastatype, nseq, ls:integer;
@@ -144,6 +144,7 @@ end;
 
 
 procedure TfrmMain.Load(Sender: TObject);   //load file
+
 var s, s1, s2, mem_ac: string;
     align, init1, initn, opt, zscore, e, ac, id, de: shortstring;
     w,erreur:integer;
@@ -151,8 +152,9 @@ var s, s1, s2, mem_ac: string;
 
 
 procedure loadFASTA;  //load FASTA output
+
 var w, n1, eliminate_repeated_ac: integer;
-    homol_percent, query_id: shortstring;
+    homol_percent, short_query_id: shortstring;
     hp: Double;
     flag_seq, flag_revcomp: boolean;
     seq, query_seq: string;
@@ -187,6 +189,8 @@ for w := 0 to f.count-1 do
         query_id := f[w];
         query_id := stringreplace(query_id, '>>>', '', []);
         query_id := copy(query_id, 1, pos(', ', query_id) - 1);
+        // first 12 char
+        short_query_id := copy(query_id, 1, 12);
         end;
 
 
@@ -286,7 +290,7 @@ for n1 := 1 to nseq do
      query_seq := '';
      repeat
           //showmessage(f[posit[n1]^ + w]);
-        if pos('>' + query_id, f[posit[n1]^ + w]) = 1 then
+        if pos('>' + short_query_id, f[posit[n1]^ + w]) = 1 then
            begin
            flag_seq := true;
            inc(w);
@@ -298,7 +302,7 @@ for n1 := 1 to nseq do
            end;
         inc(w);
         if (pos('>', f[posit[n1]^ + w]) <> 0)
-            and (pos('>' + query_id, f[posit[n1]^ + w]) = 0) then
+            and (pos('>' + short_query_id, f[posit[n1]^ + w]) = 0) then
            break;
 
      until (f[posit[n1]^ + w -1] = '>>><<<');
@@ -669,7 +673,7 @@ const validbase='ACGTUYRWSKMBDHVN-';
 var flagseqloc, flagtotrev, flagname, flaggap: boolean;
     deb, n1: word;
     s0, nomseq, nomquery, mem: string;
-    s4,s5,q,seqquery, mem2, s,s2, query_id, new_seq, seq_ac, seq_def: string;
+    s4,s5,q,seqquery, mem2, s,s2, new_seq, seq_ac, seq_def: string;
     ft: textfile;
     flagadd, flagfirstgi, flag_incl_gi, flagL, flagrev,
     flag_already_added, flag_query_added: boolean;
@@ -742,7 +746,7 @@ for query_seq_idx := 0 to  different_aligned_queries.count -1 do
            if not flag_query_added then
                begin
                f2.add('');
-               seq_ac := 'query';
+               seq_ac := query_id;
                while length(seq_ac) < 100 do
                    seq_ac := seq_ac + ' ';
                f2.add(seq_ac + ' ' + different_aligned_queries[query_seq_idx]);
@@ -763,6 +767,27 @@ for query_seq_idx := 0 to  different_aligned_queries.count -1 do
            f2.add(seq_ac + ' ' + new_seq);
            end;
     end;
+
+
+for w3 := 0 to f.Count - 1 do  //search for database info
+    if (pos(' residues ',f[w3])<>0) and (pos(' sequences',f[w3])<>0) and (pos(' in ',f[w3])<>0) then
+        break;
+f2.insert(0,'');
+f2.insert(0,'');
+for w:=w3+5 downto w3 do
+    f2.Insert(0,f[w]);
+
+f2.insert(0,'');
+for w:=6 downto 0 do  //insert FASTA header
+    f2.insert(0,f[w]);
+
+f2.insert(0,'');
+f2.insert(0,'FASTA scan '+version_number+' (output: query-anchored format)');
+
+//end of file
+f2.add('');
+for w:=f.Count-7 to f.Count-1 do
+    f2.add(f[w]);
 
 // showmessage(inttostr(f2.count));
 

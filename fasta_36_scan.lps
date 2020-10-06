@@ -11,7 +11,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="-1"/>
         <CursorPos Y="34"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
       <Unit1>
@@ -21,8 +21,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="86"/>
-        <CursorPos X="25" Y="138"/>
+        <TopLine Value="737"/>
+        <CursorPos X="18" Y="790"/>
+        <FoldState Value=" T3jA0P031 pldoJ0E3 pjLk205l"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
@@ -30,14 +31,15 @@
           <CursorPos X="4" Y="141"/>
           <FoldState Value=" T3jA0P031 plaoF0E3 pjLk2051 T1pK0j8"/>
         </ExtraEditor1>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
         <Bookmarks Count="4">
-          <Item0 Y="680"/>
-          <Item1 Y="461" ID="1"/>
-          <Item2 X="11" Y="153" ID="2"/>
-          <Item3 X="6" Y="306" ID="4"/>
+          <Item0 Y="684"/>
+          <Item1 Y="465" ID="1"/>
+          <Item2 X="11" Y="154" ID="2"/>
+          <Item3 X="6" Y="310" ID="4"/>
         </Bookmarks>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
@@ -46,7 +48,7 @@
         <HasResources Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="3"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
@@ -57,7 +59,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
         <CursorPos X="33" Y="9"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -68,7 +70,7 @@
         <HasResources Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="3"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
       <Unit5>
@@ -77,7 +79,7 @@
         <HasResources Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="3"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit5>
       <Unit6>
