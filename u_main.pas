@@ -71,8 +71,8 @@ type
   end;
 
 const maxseq = 1000000;
-      version_number = '1.4';
-      version_date = '2020-10-06';
+      version_number = '1.5';
+      version_date = '2020-11-17';
       program_name = 'FASTA 36 Scan';
 
 var frmMain: TfrmMain;
@@ -288,8 +288,13 @@ for n1 := 1 to nseq do
      w := 1;
      flag_seq := false;
      query_seq := '';
+     flag_revcomp := false;
      repeat
-          //showmessage(f[posit[n1]^ + w]);
+        //showmessage(f[posit[n1]^ + w]);
+        // check sense of query
+        if pos('; fa_frame: r', f[posit[n1]^ + w]) <> 0 then
+           flag_revcomp := true;
+
         if pos('>' + short_query_id, f[posit[n1]^ + w]) = 1 then
            begin
            flag_seq := true;
@@ -298,7 +303,7 @@ for n1 := 1 to nseq do
 
         if flag_seq and (pos(';', f[posit[n1]^ + w]) = 0) then
            begin
-           query_seq := query_seq +  f[posit[n1]^ + w];
+           query_seq := query_seq +  f[posit[n1]^ + w]
            end;
         inc(w);
         if (pos('>', f[posit[n1]^ + w]) <> 0)
@@ -307,7 +312,13 @@ for n1 := 1 to nseq do
 
      until (f[posit[n1]^ + w -1] = '>>><<<');
 
-     query_seq_list.Add(query_seq);
+     (*
+     if flag_revcomp then
+         query_seq_list.Add(rev(query_seq))
+     end
+     else
+         query_seq_list.Add(query_seq);
+     *)
 
      // extract sequence
      w := 1;
@@ -354,16 +365,26 @@ for n1 := 1 to nseq do
           delete(seq, pos('-', seq), 1);
      *)
      if flag_revcomp then
-         seq_list.Add(rev(seq))
+         begin
+         // align length of query on length of aligned seq
+         while length(query_seq) < length(seq) do
+            query_seq := query_seq + '-';
+         query_seq_list.Add(rev(query_seq));
+
+         seq_list.Add(rev(seq));
+         end
      else
+         begin
+         query_seq_list.Add(query_seq);
          seq_list.Add(seq);
+         end;
 
      if (f[posit[n1]^ + w -1] = '>>><<<') then
         break;
+
      end;
 
 end; //loadFASTA
-
 
 //==========================================================================
 begin //tfrmMain.load
@@ -430,10 +451,12 @@ inifile.free;
 application.terminate; 
 end;  //end_program
 
+
 procedure TfrmMain.Quit1Click(Sender: TObject);
 begin
 end_program;
 end;
+
 
 function checknumb(s:string):boolean; //check for number
 var t:byte;
@@ -552,6 +575,7 @@ frmSelect.left:=0;
 frmSelect.show;
 end;
 
+
 procedure TfrmMain.Info1Click(Sender: TObject);
 begin
 if (fastatype=0) then
@@ -567,11 +591,13 @@ else
 
 end;
 
+
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 Action := caNone;
 end_program;
 end;
+
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var i:integer;
@@ -598,6 +624,7 @@ if lv.Items.count > 0 then
           lv.Items[w].Checked := true;
 end;
 
+
 procedure TfrmMain.MenuItem2Click(Sender: TObject);
 var w:integer;
 begin
@@ -606,6 +633,7 @@ if lv.Items.count > 0 then
        if lv.Items[w].selected then
           lv.Items[w].Checked:=false;
 end;          
+
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin

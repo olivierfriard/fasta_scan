@@ -1,0 +1,29 @@
+FASTA scan 2.3 (output: query-anchored format)
+
+# fasta34 -L -H -z 1 -E 10000
+FASTA searches a protein or DNA sequence data bank version 3.4t24 July 21, 2004
+Please cite:
+ W.R. Pearson & D.J. Lipman PNAS (1988) 85:2444-2448
+
+ CMVPLD_rt_ampl, 103 nt
+ vs EMBL vrl library
+
+5090021746 residues in 3000000 library sequences
+ statistics sampled from 60000 to 3007406 sequences
+  Expectation_n fit: rho(ln(x))= 5.2307+/-0.000181; mu= 15.1540+/- 0.012
+ mean_var=79.8722+/-16.007, 0's: 19 Z-trim: 27  B-trim: 3823 in 3/71
+ Lambda= 0.143508
+
+
+
+CMVPL-                                                                                                  CACTTTCTTCCTGATCACTGTTCTCAGCCACAATTACTGAGGACAGAGGGATAGTCGCGGGTACAGGGGACTCTGGGGGTGACACCAGAGAATCAGAGGAGCT
+AC146999 /rev     Human Herpesvirus 5 AD169-BAC isolate, complete sequence. (233739 nt)                 .......................................................................................................    103
+MK213797 /rev     Human betaherpesvirus 5 isolate UCSF-1a genomic sequence. (231150 nt)                 .......................................................................................................    103
+
+103 residues in 1 query   sequences
+5090021746 residues in 3000000 library sequences
+ Scomplib [34t24]
+ start: Wed Nov 11 15:19:30 2020 done: Wed Nov 11 15:26:31 2020
+ Total Scan time: 261.660 Total Display time:  0.600
+
+Function used was FASTA [version 3.4t24 July 21, 2004]

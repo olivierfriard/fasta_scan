@@ -1,7 +1,7 @@
 object frmAbout: TfrmAbout
-  Left = 491
+  Left = 520
   Height = 381
-  Top = 658
+  Top = 603
   Width = 592
   HorzScrollBar.Range = 450
   VertScrollBar.Range = 344
