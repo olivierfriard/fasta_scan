@@ -1,8 +1,7 @@
 {u_about.pas - FASTA 36 Scan
 
-Copyright (C) 2018-2020 Olivier Friard
-
-olivier.friard@unito.it
+Copyright (C) 2018-2021 Olivier Friard
+(olivier.friard@unito.it)
 
 This file is part of FASTA 36 Scan software
 
