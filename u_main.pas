@@ -70,8 +70,8 @@ type
   end;
 
 const maxseq = 1000000;
-      version_number = '1.5';
-      version_date = '2020-11-17';
+      version_number = '1.6';
+      version_date = '2021-01-16';
       program_name = 'FASTA 36 Scan';
 
 var frmMain: TfrmMain;
@@ -134,6 +134,7 @@ with frmMain do
     end;
 end; //count number of checked sequences
 
+
 procedure TfrmMain.About1Click(Sender: TObject);  //show About window
 begin
 frmabout.lb_version.caption := 'version ' + version_number;
@@ -156,7 +157,7 @@ var w, n1, eliminate_repeated_ac: integer;
     homol_percent, short_query_id: shortstring;
     hp: Double;
     flag_seq, flag_revcomp: boolean;
-    seq, query_seq: string;
+    seq, query_seq, test: string;
 
 begin
 //check for FASTA file
@@ -202,11 +203,11 @@ for w := 0 to f.count-1 do
 
 if s2 = '' then //unknown query length
     repeat
-       s2:=inputbox('Query length','Input the query length','');
-       val(s2,ls,erreur);
-       if (erreur<>0) or (ls=0) then
+       s2 := inputbox('Query length','Input the query length','');
+       val(s2, ls, erreur);
+       if (erreur <> 0) or (ls = 0) then
           showmessage('Input a numeric positive value!');
-    until ls<>0;
+    until ls <> 0;
 
 ls := strtoint(s2);
 
@@ -226,9 +227,12 @@ while w <= f.count-1 do
     if (copy(f[w], 1, 2) = '>>')
         and (copy(f[w], 1, 3) <> '>>>') then
         begin
+
         inc(nseq);
         new(posit[nseq]);
         posit[nseq]^ := w;
+
+
         end;
     inc(w);
     end;
@@ -245,6 +249,9 @@ eliminate_repeated_ac := -1;
 
 for n1 := 1 to nseq do
      begin
+
+     test:= f[posit[n1]^];
+
      s := f[posit[n1]^];    // '>>'
 
      //read first word from ID sequence
@@ -252,8 +259,22 @@ for n1 := 1 to nseq do
      s := copy(s, 3, 255);
      //extract ACCESSION first word
      ac := copy(s, 1, pos(' ', s) - 1);
+     // check if output from FASTA between a FASTA DB
+     if ac = '' then
+        begin
+        if pos(';', s) <> 0 then
+           begin
+           ac := copy(s, 1, pos(';', s) - 1);
+           end
+        else
+           begin
+           ac := s;
+           end;
+        end;
+
      //remove ID
      delete(s, 1, length(ac));
+
      //remove ; if present
      ac := stringreplace(ac, ';', '', []);
 
@@ -326,7 +347,7 @@ for n1 := 1 to nseq do
      flag_revcomp := false;
 
      repeat
-
+        test := f[posit[n1]^ + w];
         if pos('; bs_ident: ', f[posit[n1]^ + w]) <> 0 then
             begin
             homol_percent := stringreplace(f[posit[n1]^ + w], '; bs_ident: ', '', []);
@@ -382,6 +403,8 @@ for n1 := 1 to nseq do
         break;
 
      end;
+
+// seq_list.savetofile('/tmp/test1.seq')
 
 end; //loadFASTA
 
@@ -693,7 +716,7 @@ end;
 
 procedure TfrmMain.mi_SaveselectedsequencesinFASTACONVformatClick(
   Sender: TObject);
-
+(* save sequence in query anchored format *)
 const validbase='ACGTUYRWSKMBDHVN-';
       tabseq=104;
 
@@ -722,7 +745,7 @@ for w := 0 to lv.items.count - 1 do
 
 if n1 = 0 then
    begin
-   showmessage('No selected sequences!');
+   showmessage('No selected sequences');
    exit;
    end;
 
@@ -753,6 +776,7 @@ different_aligned_queries.add(query_seq_list[0]);
 for query_seq_idx := 1 to  query_seq_list.count -1 do
     begin
     flag_already_added := false;
+    // check if query seq already added
     for w:= 0 to different_aligned_queries.count - 1 do
         if query_seq_list[query_seq_idx] = different_aligned_queries[w] then
             begin
@@ -762,6 +786,11 @@ for query_seq_idx := 1 to  query_seq_list.count -1 do
     if not flag_already_added then
         different_aligned_queries.add(query_seq_list[query_seq_idx])
     end;
+
+(*
+showmessage(inttostr(query_seq_list.count));
+showmessage(inttostr(seq_list.count));
+*)
 
 f2 := Tstringlist.create;
 for query_seq_idx := 0 to  different_aligned_queries.count -1 do
@@ -782,10 +811,13 @@ for query_seq_idx := 0 to  different_aligned_queries.count -1 do
 
            new_seq := '';
            for i := 1 to length(query_seq_list[w]) do
+               begin
+               // debugging showmessage(query_seq_list[w][i] + ' ' + seq_list[w][i]);
                if query_seq_list[w][i] = seq_list[w][i] then
                   new_seq := new_seq + '.'
                else
                   new_seq := new_seq + seq_list[w][i];
+               end;
            seq_ac := lv.items[w].subitems.strings[0];
            seq_ac := seq_ac + '  ' +lv.items[w].subitems.strings[1];
 
@@ -799,17 +831,17 @@ for query_seq_idx := 0 to  different_aligned_queries.count -1 do
 for w3 := 0 to f.Count - 1 do  //search for database info
     if (pos(' residues ',f[w3])<>0) and (pos(' sequences',f[w3])<>0) and (pos(' in ',f[w3])<>0) then
         break;
-f2.insert(0,'');
-f2.insert(0,'');
-for w:=w3+5 downto w3 do
-    f2.Insert(0,f[w]);
+f2.insert(0, '');
+f2.insert(0, '');
+for w := w3+5 downto w3 do
+    f2.Insert(0, f[w]);
 
-f2.insert(0,'');
+f2.insert(0, '');
 for w:=6 downto 0 do  //insert FASTA header
-    f2.insert(0,f[w]);
+    f2.insert(0, f[w]);
 
-f2.insert(0,'');
-f2.insert(0,'FASTA scan '+version_number+' (output: query-anchored format)');
+f2.insert(0, '');
+f2.insert(0, 'FASTA scan ' + version_number + ' (output: query-anchored format)');
 
 //end of file
 f2.add('');
