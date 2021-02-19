@@ -70,8 +70,8 @@ type
   end;
 
 const maxseq = 1000000;
-      version_number = '1.6';
-      version_date = '2021-01-16';
+      version_number = '1.7';
+      version_date = '2021-02-19';
       program_name = 'FASTA 36 Scan';
 
 var frmMain: TfrmMain;
