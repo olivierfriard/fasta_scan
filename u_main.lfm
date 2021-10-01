@@ -1,13 +1,13 @@
 object frmMain: TfrmMain
-  Left = 393
+  Left = 244
   Height = 384
-  Top = 652
+  Top = 740
   Width = 561
   VertScrollBar.Range = 19
   ActiveControl = lv
   Caption = 'FASTA 36 Scan'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 363
+  ClientWidth = 561
   Color = clBackground
   Font.Color = clWindowText
   Font.Height = -11
@@ -16,10 +16,10 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.0.6.0'
   object lv: TListView
     Left = 0
-    Height = 341
+    Height = 343
     Top = 0
     Width = 561
     Align = alClient
@@ -50,8 +50,8 @@ object frmMain: TfrmMain
   end
   object sb: TStatusBar
     Left = 0
-    Height = 23
-    Top = 341
+    Height = 20
+    Top = 343
     Width = 561
     Color = clMenu
     Panels = <    
@@ -68,8 +68,8 @@ object frmMain: TfrmMain
     SimplePanel = False
   end
   object MainMenu1: TMainMenu
-    Left = 162
-    Top = 64
+    left = 162
+    top = 64
     object Sequences1: TMenuItem
       Caption = 'Sequences'
       object LoadFASTAresults1: TMenuItem
@@ -86,6 +86,10 @@ object frmMain: TfrmMain
       object mi_SaveselectedsequencesinFASTACONVformat: TMenuItem
         Caption = 'Save checked sequences in "Query-anchored" format'
         OnClick = mi_SaveselectedsequencesinFASTACONVformatClick
+      end
+      object mi_save_sequences_descriptions: TMenuItem
+        Caption = 'Save sequences descriptions'
+        OnClick = mi_save_sequences_descriptionsClick
       end
       object N2: TMenuItem
         Caption = '-'
@@ -144,18 +148,18 @@ object frmMain: TfrmMain
   object OpenDialog1: TOpenDialog
     Title = 'Open'
     Filter = 'FASTA result file|*.fas;*.fasta|BLAST result file|*.blast|Text file|*.txt|All files|*.*'
-    Left = 40
-    Top = 41
+    left = 40
+    top = 41
   end
   object SaveDialog1: TSaveDialog
     Title = 'Save As'
     FilterIndex = 0
-    Left = 40
-    Top = 112
+    left = 40
+    top = 112
   end
   object lv_popupmenu: TPopupMenu
-    Left = 160
-    Top = 128
+    left = 160
+    top = 128
     object MenuItem1: TMenuItem
       Caption = 'Check'
       OnClick = MenuItem1Click
