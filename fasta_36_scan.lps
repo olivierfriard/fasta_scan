@@ -7,9 +7,9 @@
       <Unit0>
         <Filename Value="fasta_36_scan.pas"/>
         <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="5" Y="8"/>
         <UsageCount Value="47"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
       <Unit1>
@@ -19,27 +19,24 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="34"/>
-        <CursorPos X="41" Y="73"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="32"/>
+        <CursorPos X="28" Y="42"/>
         <FoldState Value=" TM HqN01 T3rT0E3 pjLk405119j"/>
         <UsageCount Value="47"/>
         <Bookmarks Count="2">
           <Item0 X="3" Y="795" ID="1"/>
           <Item1 Y="408"/>
         </Bookmarks>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
         <Filename Value="u_warning.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="5" Y="8"/>
         <UsageCount Value="47"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
@@ -48,30 +45,27 @@
         <ComponentName Value="frmAbout"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="49"/>
         <UsageCount Value="47"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
         <Filename Value="u_select.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="5" Y="8"/>
         <UsageCount Value="47"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
       <Unit5>
         <Filename Value="u_options.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="5" Y="8"/>
         <UsageCount Value="47"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit5>
       <Unit6>
@@ -83,128 +77,10 @@
         <UsageCount Value="10"/>
       </Unit6>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
-      <Position1>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="233" TopLine="193"/>
-      </Position1>
-      <Position2>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="234" TopLine="193"/>
-      </Position2>
-      <Position3>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="238" TopLine="193"/>
-      </Position3>
-      <Position4>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="225" TopLine="193"/>
-      </Position4>
-      <Position5>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="227" TopLine="193"/>
-      </Position5>
-      <Position6>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="238" TopLine="193"/>
-      </Position6>
-      <Position7>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="225" TopLine="193"/>
-      </Position7>
-      <Position8>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="227" TopLine="193"/>
-      </Position8>
-      <Position9>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="238" TopLine="193"/>
-      </Position9>
-      <Position10>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="225" TopLine="193"/>
-      </Position10>
-      <Position11>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="227" TopLine="193"/>
-      </Position11>
-      <Position12>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="238" TopLine="193"/>
-      </Position12>
-      <Position13>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="225" TopLine="193"/>
-      </Position13>
-      <Position14>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="227" TopLine="193"/>
-      </Position14>
-      <Position15>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="238" TopLine="193"/>
-      </Position15>
-      <Position16>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="225" TopLine="193"/>
-      </Position16>
-      <Position17>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="227" TopLine="193"/>
-      </Position17>
-      <Position18>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="238" TopLine="193"/>
-      </Position18>
-      <Position19>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="253" TopLine="208"/>
-      </Position19>
-      <Position20>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="337" TopLine="305"/>
-      </Position20>
-      <Position21>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="253" Column="27" TopLine="221"/>
-      </Position21>
-      <Position22>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="255" TopLine="221"/>
-      </Position22>
-      <Position23>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="259" TopLine="221"/>
-      </Position23>
-      <Position24>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="261" TopLine="221"/>
-      </Position24>
-      <Position25>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="255" TopLine="221"/>
-      </Position25>
-      <Position26>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="268" Column="4" TopLine="246"/>
-      </Position26>
-      <Position27>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="354" Column="34" TopLine="322"/>
-      </Position27>
-      <Position28>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="272" Column="16" TopLine="243"/>
-      </Position28>
-      <Position29>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="412" Column="7" TopLine="383"/>
-      </Position29>
-      <Position30>
-        <Filename Value="u_main.pas"/>
-        <Caret Line="267" Column="16" TopLine="237"/>
-      </Position30>
-    </JumpHistory>
+    <General>
+      <ActiveWindowIndexAtStart Value="-1"/>
+    </General>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode="default"/>

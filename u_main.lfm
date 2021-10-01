@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 372
+  Left = 244
   Height = 384
-  Top = 862
+  Top = 740
   Width = 561
   VertScrollBar.Range = 19
   ActiveControl = lv
@@ -86,6 +86,10 @@ object frmMain: TfrmMain
       object mi_SaveselectedsequencesinFASTACONVformat: TMenuItem
         Caption = 'Save checked sequences in "Query-anchored" format'
         OnClick = mi_SaveselectedsequencesinFASTACONVformatClick
+      end
+      object mi_save_sequences_descriptions: TMenuItem
+        Caption = 'Save sequences descriptions'
+        OnClick = mi_save_sequences_descriptionsClick
       end
       object N2: TMenuItem
         Caption = '-'

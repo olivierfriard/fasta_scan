@@ -18,8 +18,12 @@ uses inifiles,strutils,
   StdCtrls, Menus, ComCtrls, ExtCtrls;
 
 type
+
+  { TfrmMain }
+
   TfrmMain = class(TForm)
     MainMenu1: TMainMenu;
+    mi_save_sequences_descriptions: TMenuItem;
     Sequences1: TMenuItem;
     LoadFASTAresults1: TMenuItem;
     N3: TMenuItem;
@@ -48,6 +52,7 @@ type
     mi_SaveselectedsequencesinFASTACONVformat: TMenuItem;
     procedure About1Click(Sender: TObject);
     procedure Load(Sender: TObject);
+    procedure mi_save_sequences_descriptionsClick(Sender: TObject);
     procedure Quit1Click(Sender: TObject);
     procedure mi_SaveselectedsequencesClick(Sender: TObject);
     procedure SUS1Click(Sender: TObject);
@@ -70,8 +75,8 @@ type
   end;
 
 const maxseq = 1000000;
-      version_number = '1.6';
-      version_date = '2021-01-16';
+      version_number = '1.8';
+      version_date = '2021-10-01';
       program_name = 'FASTA 36 Scan';
 
 var frmMain: TfrmMain;
@@ -412,7 +417,7 @@ end; //loadFASTA
 begin //tfrmMain.load
 
 opendialog1.title:='Open FASTA output';
-opendialog1.filter:='FASTA output (*.fas; *.fasta)|*.fas;*.fasta|Text file (*.txt)|*.txt|All files (*.*)|*.*';
+opendialog1.filter:='FASTA output (*.fas; *.fasta)|*.fas;*.fasta|Text file (*.txt)|*.txt|All files (*)|*';
 
 if not flagparam then
    begin
@@ -453,8 +458,72 @@ sb.panels[1].text:='Selected: 0';
 caption:='FASTA Scan - version '+version_number+' ('+version_date+') - '+nom_input;
 mi_SaveSelectedSequences.enabled:=true;
 mi_SaveselectedsequencesinFASTACONVformat.enabled:=true;
+mi_save_sequences_descriptions.enabled := true;
 selection1.enabled:=true;
 end;//load file
+
+
+procedure TfrmMain.mi_save_sequences_descriptionsClick(Sender: TObject);
+// save sequences descriptions
+
+var w: integer;
+    n1: word;
+    seq_ac, descr_str: shortstring;
+    flagadd: boolean;
+    ft: textfile;
+
+begin
+//search for selected sequences
+for w := 0 to lv.items.count - 1 do
+    if (lv.items[w].checked)  then
+       begin
+       n1 := 1;
+       break;
+       end;
+if n1 = 0 then
+   begin
+   showmessage('No selected sequences!');
+   exit;
+   end;
+
+f2 := Tstringlist.create;
+for w := 0 to lv.items.count - 1 do
+    if (lv.items[w].checked)  then
+       begin
+       seq_ac := lv.items[w].subitems.strings[0];
+       descr_str := lv.items[w].subitems.strings[1]; //DE
+       f2.add(seq_ac +  ' ' + descr_str);
+       end;
+
+savedialog1.filename := changefileext(nom_input, '.txt');
+if savedialog1.execute then
+    begin
+    flagadd := false;
+    if fileexists(savedialog1.filename) then
+        begin
+        frmWarning.showmodal;
+        if frmWarning.modalresult=mrcancel then
+           exit;
+        if frmWarning.modalresult=mrno then
+           flagadd:=true
+        else
+           flagadd:=false;
+        end;
+
+    if not flagadd then
+        f2.savetofile(savedialog1.filename) //overwrite f file already exists
+    else
+        begin
+        assignfile(ft,savedialog1.filename);  //add if file already exists
+        append(ft);
+        for n1 := 0 to f2.count-1 do
+            writeln(ft,f2[n1]);
+        closefile(ft);
+        end;
+    end;
+
+f2.free;
+end;
 
 
 procedure end_program;  //ask user confirmation and close program
@@ -496,6 +565,7 @@ end;  //checknumb
 
 
 procedure TfrmMain.mi_SaveselectedsequencesClick(Sender: TObject);
+
 var flagseqloc, flagtotrev, flagname, flaggap, flagrev: boolean;
     deb,n1: word;
     w,w1,w2: integer;
@@ -521,7 +591,7 @@ if n1 = 0 then
    end;
 
 frmOptions.showmodal;
-if frmOptions.modalresult=mrCancel then
+if frmOptions.modalresult = mrCancel then
    exit;
 
 f2 := Tstringlist.create;
@@ -557,9 +627,9 @@ for w := 0 to lv.items.count - 1 do
        //writeln(seq_list[w])
        end;
 
-Screen.Cursor:=crDefault;
+Screen.Cursor := crDefault;
 
-savedialog1.filename:=changefileext(nom_input, '.fst');
+savedialog1.filename := changefileext(nom_input, '.fst');
 if savedialog1.execute then
     begin
     flagadd:=false;
@@ -631,6 +701,8 @@ inifile.free;
 decimalseparator := '.';
 mi_saveselectedsequences.enabled := false;
 mi_SaveselectedsequencesinFASTACONVformat.enabled := false;
+mi_save_sequences_descriptions.enabled := false;
+
 flagparam := false;
 f := Tstringlist.create;
 caption:='FASTA 36 Scan - version ' + version_number + ' (' + version_date+')';

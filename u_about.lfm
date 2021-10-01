@@ -1,14 +1,14 @@
 object frmAbout: TfrmAbout
-  Left = 363
-  Height = 381
-  Top = 162
-  Width = 592
+  Left = 426
+  Height = 359
+  Top = 842
+  Width = 598
   HorzScrollBar.Range = 450
   VertScrollBar.Range = 344
   BorderStyle = bsToolWindow
   Caption = 'About'
-  ClientHeight = 366
-  ClientWidth = 577
+  ClientHeight = 344
+  ClientWidth = 583
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
@@ -64,7 +64,7 @@ object frmAbout: TfrmAbout
     TabStop = False
   end
   object Button1: TButton
-    Left = 488
+    Left = 424
     Height = 25
     Top = 312
     Width = 75
